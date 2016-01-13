@@ -53,6 +53,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConstitutionWizard\New_Stokvel.cs" />
+    <Compile Include="Stokvel.cs" />
+    <Page Include="ConstitutionWizard\Constitution_Wizard_1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ConstitutionWizard\Constitution_Wizard_2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -60,6 +70,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ConstitutionWizard\Constitution_Wizard_1.xaml.cs">
+      <DependentUpon>Constitution_Wizard_1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConstitutionWizard\Constitution_Wizard_2.xaml.cs">
+      <DependentUpon>Constitution_Wizard_2.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
