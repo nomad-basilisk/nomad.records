@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Threading;
 
 namespace NomadRecords
 {
@@ -23,31 +24,57 @@ namespace NomadRecords
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DispatcherTimer _timer = null;
+
         public MainWindow()
         {
             InitializeComponent();
-            FillDataGrid(); 
+            FillDataGrid();
+
+            _timer = new DispatcherTimer();
+            _timer.Tick += Each_Tick;
+            _timer.Interval = new TimeSpan(0, 0, 0, 0, 1500);
+            _timer.Start(); 
+        }
+
+        private void Each_Tick(object o, EventArgs sender)
+        {
+            // Refresh from database etc ...
+            FillDataGrid();
+            Console.WriteLine("Polling database.");
         }
 
         private void FillDataGrid() {
-            string ConString = "Data Source=RokoBasilisk-PC;Initial Catalog=NMR_001_BETA;Integrated Security=True;";
-            string CmdString;
-            using (SqlConnection con = new SqlConnection(ConString))
+            grdStokvel.ItemsSource = null;
+            var connectionString = ConfigurationManager.ConnectionStrings["conString"].ConnectionString;
+
+            string CmdString = String.Empty;
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
-                CmdString = "SELECT s.name AS 'Stokvel Name', s.contribution_amount AS 'Contribution Amount', s.inception_date AS 'Inception Date', count(m.id) AS 'Members' FROM stokvel s LEFT JOIN member m ON m.stokvel_id = s.id GROUP BY s.name, s.contribution_amount, s.inception_date";
+                CmdString = "SELECT s.id, s.name AS 'Stokvel_Name', s.contribution_amount AS 'Contribution_Amount', s.inception_date AS 'Inception_Date', count(m.id) AS 'Members' FROM stokvel s LEFT JOIN member m ON m.stokvel_id = s.id GROUP BY s.id, s.name, s.contribution_amount, s.inception_date";
                 SqlCommand cmd = new SqlCommand(CmdString, con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable("Stokvel");
                 sda.Fill(dt);
+                
                 grdStokvel.ItemsSource = dt.DefaultView;
             }  
         }
-
+        
         private void NewStokvelButton(object sender, RoutedEventArgs e)
         {
-            ConstitutionWizard.Constitution_Wizard_1 win = new ConstitutionWizard.Constitution_Wizard_1();
+            ConstitutionWizard .Constitution_Wizard_1 win = new ConstitutionWizard.Constitution_Wizard_1();
             win.Show();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            object ID = ((Button)sender).CommandParameter;
+            StaticStokvel.id = ID.ToString();
+
+            Stokvel_Dashboard sd = new Stokvel_Dashboard(ID.ToString());
+            sd.Show();
+           
+        }
     }
 }

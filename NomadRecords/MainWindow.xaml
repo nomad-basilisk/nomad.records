@@ -1,26 +1,25 @@
 ﻿<Window x:Class="NomadRecords.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Nomad Records" Height="480" Width="704">
+        Title="Nomad Records" Height="700" Width="1024"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Button Content="New Stokvel" Click="NewStokvelButton" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.213,0.5" Height="32"/>
-        <DataGrid Name="grdStokvel" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Height="383" Width="676">
+        <DataGrid Name="grdStokvel" Margin="10,56,10,10" AutoGenerateColumns="False" ColumnWidth="*">
             <DataGrid.Columns>
-
-                <DataGridTextColumn Header="Stokvel Name" Binding="{Binding Stokvel Name}" />
-                <DataGridTextColumn Header="Contribution Amount" Binding="{Binding Contribution Amount}" />
-                <DataGridTextColumn Header="Inception Date" Binding="{Binding Inception Date}" />
+                <DataGridTextColumn Header="Stokvel Name" Binding="{Binding Stokvel_Name}" />
+                <DataGridTextColumn Header="Contribution Amount" Binding="{Binding Contribution_Amount}" />
+                <DataGridTextColumn Header="Inception Date" Binding="{Binding Inception_Date}" />
                 <DataGridTextColumn Header="Members" Binding="{Binding Members}" />
                 <DataGridTemplateColumn Header="View Details">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Open" BorderThickness="0" />
+                            <Button Click="Button_Click" CommandParameter="{Binding Path=id}">View Details</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
             </DataGrid.Columns>
         </DataGrid>
-        
+
     </Grid>
 </Window>

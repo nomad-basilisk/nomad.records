@@ -19,18 +19,56 @@ namespace NomadRecords.ConstitutionWizard
     /// </summary>
     public partial class Constitution_Wizard_1 : Window
     {
+        string name;
+        string contributions;
+        string purpose;
+        string joining_fee;
 
         public Constitution_Wizard_1()
         {
             InitializeComponent();
+            StaticStokvel.wizard = true;
         }
 
         private void NextStep(object sender, RoutedEventArgs e)
         {
-            Stokvel.name = NameTextBox.Text;
-            Stokvel.purpose = PurposeTextBox.Text;
+            Stokvel sv = new Stokvel();
+            sv.name = NameTextBox.Text;
+            name = NameTextBox.Text; ;
 
-            ConstitutionWizard.Constitution_Wizard_2 win = new ConstitutionWizard.Constitution_Wizard_2();
+            sv.purpose = PurposeTextBox.Text;
+            purpose = PurposeTextBox.Text;
+
+            sv.inception_date = DateTime.Today;
+
+            //Contribution amount
+            decimal contAmount;
+
+            if (decimal.TryParse(ContAmountTextBox.Text, out contAmount))
+            {
+                sv.contribution_amount = contAmount;
+                contributions = contAmount.ToString();
+            }
+            else 
+            {
+                MessageBox.Show("Please use a valid monetary amount for Contribution Amount.");
+            }
+
+            //Joining Fee
+            decimal joiningFeeAmount;
+
+            if (decimal.TryParse(JoiningFeeTextBox.Text, out joiningFeeAmount))
+            {
+                sv.joining_fee = joiningFeeAmount;
+                joining_fee = joiningFeeAmount.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Please use a valid monetary amount for Joining Fee.");
+            }
+
+            string stokvel_id = sv.insert();
+            ConstitutionWizard.Constitution_Wizard_2 win = new ConstitutionWizard.Constitution_Wizard_2(stokvel_id, name, purpose, joining_fee, contributions);
             win.Show();
             this.Close();
         }

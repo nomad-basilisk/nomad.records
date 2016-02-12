@@ -34,8 +34,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocX">
+      <HintPath>..\packages\DocX.1.0.0.19\lib\net40\DocX.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,13 +64,72 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ConstitutionWizard\New_Stokvel.cs" />
+    <Compile Include="Add_Meeting.xaml.cs">
+      <DependentUpon>Add_Meeting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Add_Member.xaml.cs">
+      <DependentUpon>Add_Member.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Add_Record.xaml.cs">
+      <DependentUpon>Add_Record.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AgentDashboard.xaml.cs">
+      <DependentUpon>AgentDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Constitution.cs" />
+    <Compile Include="JsonStringWriter.cs" />
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Meeting.cs" />
+    <Compile Include="Meeting_Notes.xaml.cs">
+      <DependentUpon>Meeting_Notes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Member.cs" />
+    <Compile Include="Member_Verification_OTP.xaml.cs">
+      <DependentUpon>Member_Verification_OTP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Remove_Member.xaml.cs">
+      <DependentUpon>Remove_Member.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Remove_Stokvel.xaml.cs">
+      <DependentUpon>Remove_Stokvel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Security.cs" />
+    <Compile Include="Sms_OTP_Send.cs" />
+    <Compile Include="StaticMemberOTP.cs" />
+    <Compile Include="StaticStokvel.cs" />
     <Compile Include="Stokvel.cs" />
+    <Compile Include="Stokvel_Dashboard.xaml.cs">
+      <DependentUpon>Stokvel_Dashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs" />
+    <Compile Include="UserDatabase.cs" />
+    <Page Include="Add_Meeting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Add_Member.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Add_Record.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AgentDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ConstitutionWizard\Constitution_Wizard_1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ConstitutionWizard\Constitution_Wizard_2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -81,6 +151,26 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Meeting_Notes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Member_Verification_OTP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Remove_Member.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Remove_Stokvel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Stokvel_Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -100,6 +190,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
